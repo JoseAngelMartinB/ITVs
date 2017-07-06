@@ -43,6 +43,8 @@ while continuar == 1
     end
 end
 
+
+[~ , n_nuevas] = size(nuevas_itv);
 fprintf('Algoritmo terminado. %d nuevas ITVs\n', n_nuevas);
 
 

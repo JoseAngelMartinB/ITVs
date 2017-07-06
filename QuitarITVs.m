@@ -21,11 +21,7 @@ function [nuevas_itv, Dat, n_eliminadas] = QuitarITVs( Dat, D, n, nuevas_itv )
             ciudad = nuevas_itv(i);
             
             if viabilidad_pob(ciudad) == 0
-
-                % Calcular nº inspecciones de la ITV
-                inspecciones = PronosticarDemanda(ciudad, Dat, D, n);
-
-                ratio = RatioRentabilidad(ciudad, inspecciones, Dat);
+                ratio = RatioRentabilidad(ciudad, Dat, D, n);
 
                 if ratio < 1 && ratio < peor_ratio
                    peor_ratio = ratio;

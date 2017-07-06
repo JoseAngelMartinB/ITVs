@@ -15,19 +15,14 @@ function [ nuevas_itv, Dat, n_nuevas ] = PonerITVs( Dat, D, n, nuevas_itv )
     while continuar == 1
         mejor_ratio = 0;
         mejor_ciudad = -1;
-        mejor_inspecciones = 0;
 
         for i = 1:n
             if Dat(i,4) == 0 && viabilidad_pob(i) == 1 % Poblaciones sin ITV
-                % Calcular nº inspecciones si colocamos una ITV en i
-                inspecciones = PronosticarDemanda(i, Dat, D, n);
-
-                ratio = RatioRentabilidad(i, inspecciones, Dat);
+                ratio = RatioRentabilidad(i, Dat, D, n);
 
                 if ratio >= 1 && ratio > mejor_ratio
                     mejor_ratio = ratio;
                     mejor_ciudad = i;   
-                    mejor_inspecciones = inspecciones;
                 end  
 
                 if ratio < 1 % No es una ciudad viable para una nueva ITV
@@ -41,7 +36,7 @@ function [ nuevas_itv, Dat, n_nuevas ] = PonerITVs( Dat, D, n, nuevas_itv )
             nuevas_itv = [nuevas_itv mejor_ciudad]; 
             n_nuevas = n_nuevas + 1;
 
-            fprintf('\tLa mejor población es %d y tendria ratio %d y %d inspecciones.\n', mejor_ciudad, mejor_ratio, mejor_inspecciones);
+            fprintf('\tLa mejor población es %d y tendria ratio %d.\n', mejor_ciudad, mejor_ratio);
         else
             continuar = 0;
         end
