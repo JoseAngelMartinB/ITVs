@@ -19,9 +19,12 @@ function [nuevas_itv, Dat, n_eliminadas] = QuitarITVs( Dat, D, n, nuevas_itv )
 
         for i = 1:n_nuevas_itv
             ciudad = nuevas_itv(i);
+            % TODO: Eliminar siguiendo el orden del ratio o de la distancia
+            % total ???
             
             if viabilidad_pob(ciudad) == 0
-                ratio = RatioRentabilidad(ciudad, Dat, D, n);
+                [inspecciones, ~] = PronosticarDemanda(ciudad, Dat, D, n);
+                ratio = RatioRentabilidad(ciudad, inspecciones, Dat);
 
                 if ratio < 1 && ratio < peor_ratio
                    peor_ratio = ratio;
@@ -34,8 +37,6 @@ function [nuevas_itv, Dat, n_eliminadas] = QuitarITVs( Dat, D, n, nuevas_itv )
                 end
  
             end
-             
-             
         end 
         
         if peor_ciudad > 0

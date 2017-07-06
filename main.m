@@ -47,12 +47,7 @@ end
 [~ , n_nuevas] = size(nuevas_itv);
 fprintf('Algoritmo terminado. %d nuevas ITVs\n', n_nuevas);
 
-
-% NOTAS:
-% Cada pueblo cuál es su ITV de referencia y a cuanto está
-
-% Suma de todos los pueblos a los que les afecta ( vehiculos * kilometros)
-% Calcular antes y despues de añadir la ITV nueva
+% Guardar soluciones
+Visualizacion(Dat, nuevas_itv, n);
 
 
-% Región de voronoir (ITV) --> devuelve todos los pueblos que la usan
