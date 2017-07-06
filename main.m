@@ -22,53 +22,35 @@ x = Dat(:,2)* (40000/60); % latitud pasada a coordenadas cartesianas
 Pob = [x y];
 D = squareform(pdist(Pob));
 
-% Viabilidad
-viabilidad_pob = ones(1, n); % Al comienzo todas las poblaciones son viables
 
 
 % Algoritmo
+nuevas_itv = [];
 continuar = 1;
+iteracion = 1; 
+
 while continuar == 1
-    mejor_ratio = 0;
-    mejor_ciudad = -1;
-    mejor_inspecciones = 0;
+    [nuevas_itv, Dat, n_nuevas] = PonerITVs(Dat, D, n, nuevas_itv);
+    [nuevas_itv, Dat, n_eliminadas] = QuitarITVs(Dat, D, n, nuevas_itv);
     
-    for i = 1:n
-        if Dat(i,4) == 0 && viabilidad_pob(i) == 1 % Poblaciones sin ITV
-            % Calculas nº inspecciones si colocamos una ITV en i
-            inspecciones = PronosticarDemanda(i, Dat, D, n);
-
-            param_rentabilidad = CalcularRentabilidad(i, Dat);
-
-            ratio = inspecciones / param_rentabilidad;
-
-            if ratio >= 1 && ratio > mejor_ratio
-                mejor_ratio = ratio;
-                mejor_ciudad = i;   
-                mejor_inspecciones = inspecciones;
-            end  
-
-            if ratio < 1 % No es una ciudad viable para una nueva ITV
-                viabilidad_pob(i) = 0;
-            end
-
-        end
-    end
     
-    if mejor_ciudad > 0
-        Dat(mejor_ciudad,4) = 1; % Se añade una ITV a esta población
-        
-        fprintf('La mejor población es %d y tendria ratio %d y %d inspecciones.\n', mejor_ciudad, mejor_ratio, mejor_inspecciones);
-    else
+    fprintf('Iteración %d: %d ITVs añadidas, %d ITVs eliminadas.\n', iteracion, n_nuevas, n_eliminadas);
+    
+    iteracion = iteracion + 1;
+    
+    if n_nuevas == 0 && n_eliminadas == 0
         continuar = 0;
     end
-    
-    
-    % Pintar poblaciones con ITV
-    for k=1:n
-        if Dat(k,4) > 0 % Poblaciones con ITV
-            plot(Dat(k,2), Dat(k,1) ,'o')
-            hold on
-        end
-    end
 end
+
+fprintf('Algoritmo terminado. %d nuevas ITVs\n', n_nuevas);
+
+
+% NOTAS:
+% Cada pueblo cuál es su ITV de referencia y a cuanto está
+
+% Suma de todos los pueblos a los que les afecta ( vehiculos * kilometros)
+% Calcular antes y despues de añadir la ITV nueva
+
+
+% Región de voronoir (ITV) --> devuelve todos los pueblos que la usan
