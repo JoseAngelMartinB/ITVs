@@ -19,12 +19,11 @@ function [ inspecciones, vector_dis ] = PronosticarDemanda( poblacion, Dat, D, n
         poblacion_ITV_cercana = pob_con_itv(ITV_cercana);
         
         % Actualizamos datos de ITV más cercana a población j
-        
         vector_dis(j) = D_min * 2;
         
 
         if poblacion_ITV_cercana == poblacion
-            inspecciones = inspecciones + Dat(poblacion_ITV_cercana, 7);
+            inspecciones = inspecciones + Dat(j, 7);
         end
     end
 

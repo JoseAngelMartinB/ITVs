@@ -6,9 +6,9 @@ function param_rentabilidad = CalcularRentabilidad( poblacion, Dat )
 %   - Dat           Datos
 
     if Dat(poblacion,6) == 1 % Población admite ITV de proximidad
-        param_rentabilidad = 12000;
+        param_rentabilidad = 17000;
     else % Población solo admite ITV convencional
-        param_rentabilidad = 20000;
+        param_rentabilidad = 23000;
     end
 
 end

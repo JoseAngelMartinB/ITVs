@@ -24,8 +24,13 @@ function Visualizacion( Dat, nuevas_itv, n )
     
     voronoi(Dat(itv_tot, 2), Dat(itv_tot, 1));
     hold;
+    
     for i=1:n
-        plot(Dat(i,2),Dat(i,1),'*')
+        if Dat(i,4) > 0
+            plot(Dat(i,2),Dat(i,1),'o')
+        else
+            plot(Dat(i,2),Dat(i,1),'*')
+        end
     end
     
     
