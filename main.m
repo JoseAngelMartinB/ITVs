@@ -1,3 +1,8 @@
+% main.m
+% José Ángel Martín Baos
+% Ricardo García Rodenas
+% Doroteo Verastegui Rayo
+
 % Cargar Datos
 % Dat - Columnas:
 % 1 --> Longitud
